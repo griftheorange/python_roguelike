@@ -9,15 +9,15 @@ def handle_keys(key):
     elif key.vk == libtcod.KEY_DOWN:
         return {'move': (0, SPEED)}
     elif key.vk == libtcod.KEY_LEFT:
-        retunr {'move': (-SPEED, 0)}
+        return {'move': (-SPEED, 0)}
     elif key.vk == libtcod.KEY_RIGHT:
         return {'move': (SPEED, 0)}
 
+    # Non-Movement
     if key.vk == libtcod.KEY_ENTER and key.lalt:
         # Alt+Enter toggles fullscreen
         return {'fullscreen': True}
-
-    elif key.vk = libtcod.KEY_ESCAPE:
+    elif key.vk == libtcod.KEY_ESCAPE:
         # Exit the game
         return {'exit': True}
     
