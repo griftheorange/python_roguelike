@@ -12,6 +12,7 @@ class Tile:
         
         self.block_sight = block_sight
     
+    # 'Digs' out a blocked tile, making it passable
     def dig(self):
         self.blocked = False
         self.block_sight = False
