@@ -31,7 +31,10 @@ class GameMap:
            new_room = Rect(x, y, w, h)
 
            #Check to see if room intersects with another
+           print(new_room)
+           print(rooms)
            for other_room in rooms:
+                print(new_room.intersect(other_room))
                 if new_room.intersect(other_room):
                    break
                 else:
@@ -53,15 +56,15 @@ class GameMap:
                         if randint(0, 1) == 1:
                             # first move horizontally, then vertical
                             self.create_h_tunnel(prev_x, new_x, prev_y)
-                            self.create_v_tunner(prev_y, new_y, new_x)
+                            self.create_v_tunnel(prev_y, new_y, new_x)
                         else:
                             # first move vertical, than horizontal
-                            self.create_v_tunner(prev_y, new_y, prev_x)
+                            self.create_v_tunnel(prev_y, new_y, prev_x)
                             self.create_h_tunnel(prev_x, new_x, new_y)
                     
-                    #append new room to room list
-                    rooms.append(new_room)
-                    num_rooms += 1
+           #append new room to room list
+           rooms.append(new_room)
+           num_rooms += 1
 
     def create_room(self, room):
         # makes all tiles within room dimensions passable
