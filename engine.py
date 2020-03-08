@@ -17,7 +17,7 @@ def main():
     }
 
     player = Entity(int(screen_width/2), int(screen_height/2), '@', libtcod.white)
-    npc = Entity(int(screen_width/2 - 5), int(screen_height/2 - 5), '%', libtcod.yellow)
+    npc = Entity(int(screen_width/2 - 5), int(screen_height/2 - 5), '@', libtcod.yellow)
     entities = [npc, player]
 
     libtcod.console_set_custom_font('arial10x10.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
@@ -27,6 +27,7 @@ def main():
     con = libtcod.console_new(screen_width, screen_height)
 
     game_map = GameMap(map_width, map_height)
+    game_map.make_map()
 
     key = libtcod.Key()
     mouse = libtcod.Mouse()
