@@ -7,6 +7,8 @@ from  render_functions import clear_all, render_all
 def main():
     screen_width = 80
     screen_height = 50
+    map_width = screen_width
+    map_height = screen_height - 5
 
     player = Entity(int(screen_width/2), int(screen_height/2), '@', libtcod.white)
     npc = Entity(int(screen_width/2 - 5), int(screen_height/2 - 5), '%', libtcod.yellow)
