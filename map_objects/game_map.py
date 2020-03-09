@@ -59,9 +59,10 @@ class GameMap:
                        self.create_v_tunnel(prev_y, new_y, prev_x)
                        self.create_h_tunnel(prev_x, new_x, new_y)
                     
-           #append new room to room list
-           rooms.append(new_room)
-           num_rooms += 1
+               #append new room to room list
+               rooms.append(new_room)
+               num_rooms += 1
+       print(len(rooms))
 
     def create_room(self, room):
         # makes all tiles within room dimensions passable

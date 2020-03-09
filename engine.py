@@ -13,7 +13,7 @@ def main():
 
     room_max_size = 10
     room_min_size = 6
-    max_rooms = 30
+    max_rooms = 15
 
     colors = {
         'dark_wall': libtcod.Color(0, 0, 100),
