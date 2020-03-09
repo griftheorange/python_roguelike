@@ -31,36 +31,33 @@ class GameMap:
            new_room = Rect(x, y, w, h)
 
            #Check to see if room intersects with another
-           print(new_room)
-           print(rooms)
            for other_room in rooms:
-                print(new_room.intersect(other_room))
-                if new_room.intersect(other_room):
+               if new_room.intersect(other_room):
                    break
-                else:
-                    #no intersections, valid room
-                    # draw the room
-                    self.create_room(new_room)
-                    (new_x, new_y) = new_room.center()
+           else:
+               #no intersections, valid room
+               # draw the room
+               self.create_room(new_room)
+               (new_x, new_y) = new_room.center()
 
-                    if num_rooms == 0:
-                        # puts player in first room
-                        player.x = new_x
-                        player.y = new_y
-                    else:
-                        #for all rooms after first, need to connect via tunnels
-                        #center coords of prev room
-                        (prev_x, prev_y) = rooms[num_rooms - 1].center()
+               if num_rooms == 0:
+                   # puts player in first room
+                   player.x = new_x
+                   player.y = new_y
+               else:
+                   #for all rooms after first, need to connect via tunnels
+                   #center coords of prev room
+                   (prev_x, prev_y) = rooms[num_rooms - 1].center()
 
-                        # flip a coin
-                        if randint(0, 1) == 1:
-                            # first move horizontally, then vertical
-                            self.create_h_tunnel(prev_x, new_x, prev_y)
-                            self.create_v_tunnel(prev_y, new_y, new_x)
-                        else:
-                            # first move vertical, than horizontal
-                            self.create_v_tunnel(prev_y, new_y, prev_x)
-                            self.create_h_tunnel(prev_x, new_x, new_y)
+                   # flip a coin
+                   if randint(0, 1) == 1:
+                       # first move horizontally, then vertical
+                       self.create_h_tunnel(prev_x, new_x, prev_y)
+                       self.create_v_tunnel(prev_y, new_y, new_x)
+                   else:
+                       # first move vertical, than horizontal
+                       self.create_v_tunnel(prev_y, new_y, prev_x)
+                       self.create_h_tunnel(prev_x, new_x, new_y)
                     
            #append new room to room list
            rooms.append(new_room)
