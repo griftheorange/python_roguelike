@@ -137,7 +137,7 @@ def main():
             if game_state == GameStates.SHOW_INVENTORY:
                 player_turn_results.extend(player.inventory.use(item))
             elif game_state == GameStates.DROP_INVENTORY:
-                player.enemy_turn_results.extend(player.inventory.drop_item(item))
+                player_turn_results.extend(player.inventory.drop_item(item))
 
         if exit:
             if game_state in (GameStates.SHOW_INVENTORY, GameStates.DROP_INVENTORY):
