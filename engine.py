@@ -120,15 +120,14 @@ def main():
                 message_log.add_message(Message('There is nothing here to pick up.', libtcod.yellow))
         
         if show_inventory:
-            if game_state != GameStates.SHOW_INVENTORY:
-                previous_game_state = game_state
-            game_state = GameStates.SHOW_INVENTORY
-
-        if exit:
             if game_state == GameStates.SHOW_INVENTORY:
                 game_state = previous_game_state
             else:
-                return True
+                previous_game_state = game_state
+                game_state = GameStates.SHOW_INVENTORY
+
+        if exit:
+            return True
 
         if fullscreen:
             libtcod.console_set_fullscreen(not libtcod.console_is_fullscreen())
