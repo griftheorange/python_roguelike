@@ -107,6 +107,7 @@ def main():
             if dead_entity:
                 if dead_entity == player:
                     message, game_state = kill_player(dead_entity)
+                    print(game_state)
                 else:
                     message = kill_monster(dead_entity)
                 
@@ -127,6 +128,7 @@ def main():
                         if dead_entity:
                             if dead_entity == player:
                                 message, game_state = kill_player(dead_entity)
+                                print(game_state)
                             else:
                                 message = kill_monster(dead_entity)
                             
@@ -134,12 +136,12 @@ def main():
 
                             if game_state == GameStates.PLAYER_DEAD:
                                 break
+
                     if game_state == GameStates.PLAYER_DEAD:
                         break
             else:
                 game_state = GameStates.PLAYERS_TURN
 
-            game_state = GameStates.PLAYERS_TURN
 
 if __name__ == '__main__':
     main()
