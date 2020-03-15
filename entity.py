@@ -45,7 +45,7 @@ class Entity:
         # Scan the current map and set all the walls as unwalkable
         for y1 in range(game_map.height):
             for x1 in range(game_map.width):
-                libtcod.map_set_porperties(fov, x1, y1, not game_map.tiles[x1][y1].block_sight, not game_map.tiles[x1][y1].blocked)
+                libtcod.map_set_properties(fov, x1, y1, not game_map.tiles[x1][y1].block_sight, not game_map.tiles[x1][y1].blocked)
 
         # Scan all the objects to see if there are objects that must be navigated around
         # Check also that the object isnt self or the target (so that the start and end points are free)
