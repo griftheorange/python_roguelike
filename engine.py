@@ -105,7 +105,7 @@ def main():
                 print(message)
 
             if dead_entity:
-                if dead entity == player:
+                if dead_entity == player:
                     message, game_state = kill_player(dead_entity)
                 else:
                     message = kill_monster(dead_entity)
