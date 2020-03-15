@@ -6,14 +6,24 @@ class Fighter:
         self.power = power
     
     def take_damage(self, amount):
+        results = []
+
         self.hp -= amount
-        print('{0} has {1} hitpoints left.'.format(self.owner.name, str(self.hp)))
+
+        if self.hp <= 0:
+            results.appent({'dead': self.owner})
+
+        return results
     
     def attack(self, target):
+        results = []
+
         damage = self.power - target.fighter.defense
 
         if damage > 0:
-            target.fighter.take_damage(damage)
-            print('{0} attacks {1} for {2} hit points!'.format(self.owner.name.capitalize(), target.name, str(damage)))
+            results.append({'messange': '{0} attacks {1} for {2} hit points.'.format(self.owner.name.capitalize(), target.name, str(damage))})
+            results.extend(target.fighter.take_damage(damage))
         else:
-            print('{0} attacks {1} but does no damage.'.format(self.owner.name.capitalize(), target.name))
+            results.append({'message': '{0} attacks {1} but does no damage.'.format(self.owner.name.capitalize(), target.name)})
+
+        return results
