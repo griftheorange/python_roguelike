@@ -1,3 +1,5 @@
+improt tcod as libtcod
+
 import math
 
 class Entity:
@@ -36,6 +38,46 @@ class Entity:
                     get_blocking_entities_at_location(entities, self.x + dx, self.y + dy)):
             self.move(dx, dy)
     
+    def move_astar(self, target, entities, game_map):
+        # Create a FOV map that has the dimensions of the map
+        fov = libtcod.map_new(game_map.width, game_map.height)
+
+        # Scan the current map and set all the walls as unwalkable
+        for y1 in range(game_map.height):
+            for x1 in range(game_map.width):
+                libtcod.map_set_porperties(fov, x1, y1, not game_map.tiles[x1][y1].block_sight, not game_map.tiles[x1][y1].blocked)
+
+        # Scan all the objects to see if there are objects that must be navigated around
+        # Check also that the object isnt self or the target (so that the start and end points are free)
+        # The AI class handles the situation if self is next to the target so it will not use this A* function anyway
+        for entity in entities:
+            if entity.blocks and entity != self and entity != target:
+                # Set the tile as a wall so that it must be navigated around
+                libtcod.map_set_properties(fov, entity.x, entity.y, True, False)
+
+        # Allocate a A* path
+        # The 1.41 is the normal diagonal cost of moving, it can be set as 0.0 if diagonal moves are prohibited
+        my_path = libtcod.path_new_using_map(fov, 1.41)
+
+        # Compute the path between self coords and target coords
+        libtcod.path_compute(my_path, self.x, self.y, target.x, target.y)
+
+        # Check path Exists, then also make sure the path is shorter than 25 tiles
+        # Path size matters if you want the monster to use alternative longer paths
+        # It makes sense to keep path size low here
+        if not libtcod.path_is_empty(my_path) and libtcod.path_size(my_path) < 25:
+            # Find the next coordinates in the computed path
+            x, y = libtcod.path_walk(my_path, True)
+            if x or y:
+                # Set self's coords to the next path tile
+                self.x = x
+                self.y = y
+        else:
+            # Keep the old move function as a backup if there are no paths
+            # It will still try to move towards the player
+            self.move_towards(target.x, target.y, game_map, entities)
+        libtcod.path_delete(my_path)
+
     def distance_to(self, other):
         dx = other.x - self.x
         dy = other.y - self.y
