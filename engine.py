@@ -1,5 +1,6 @@
 import tcod as libtcod
 
+from components.fighter import Fighter
 from entity import Entity, get_blocking_entities_at_location
 from fov_functions import initialize_fov, recompute_fov
 from game_states import GameStates
@@ -30,7 +31,8 @@ def main():
         'light_ground': libtcod.Color(200, 180, 50)
     }
 
-    player = Entity(0, 0, '@', libtcod.white, 'Player', blocks=True)
+    fighter_component = Fighter(hp=30, defense=2, power=5)
+    player = Entity(0, 0, '@', libtcod.white, 'Player', blocks=True, fighter=fighter_component)
     entities = [player]
 
     libtcod.console_set_custom_font('arial10x10.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
@@ -93,8 +95,8 @@ def main():
 
         if game_state == GameStates.ENEMY_TURN:
             for entity in entities:
-                if entity != player:
-                    print('The ' + entity.name + ' ponders the answer to everything, but not the question.')
+                if entity.ai:
+                    entity.ai.take_turn()
             
             game_state = GameStates.PLAYERS_TURN
 
