@@ -5,7 +5,9 @@ from components.inventory import Inventory
 
 from entity import Entity
 
-from game_messages import GamesStates
+from game_messages import MessageLog
+
+from game_states import GameStates
 
 from map_objects.game_map import GameMap
 
@@ -79,10 +81,10 @@ def get_game_variables(constants):
     entities = [player]
 
     game_map = GameMap(constants['map_width'], constants['map_height'])
-    game_map.make_map(constants['max_rooms'], constants['room_min_size'], constants['room_max_size'], constants['map_width'], contants['map_height'], player, entities, constants['max_monsters_per_room'], constants['max_items_per_room'])
+    game_map.make_map(constants['max_rooms'], constants['room_min_size'], constants['room_max_size'], constants['map_width'], constants['map_height'], player, entities, constants['max_monsters_per_room'], constants['max_items_per_room'])
 
     message_log = MessageLog(constants['message_x'], constants['message_width'], constants['message_height'])
 
-    game_state = GamesStates.PLAYERS_TURN
+    game_state = GameStates.PLAYERS_TURN
 
     return player, entities, game_map, message_log, game_state
