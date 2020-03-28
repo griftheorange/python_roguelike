@@ -13,10 +13,12 @@ from map_objects.rectangle import Rect
 from map_objects.tile import Tile
 
 class GameMap:
-    def __init__(self, width, height):
+    def __init__(self, width, height, dungeon_level=1):
         self.width = width
         self.height = height
         self.tiles = self.initialize_tiles()
+
+        self.dungeon_level = dungeon_level
     
     def initialize_tiles(self):
         tiles = [[Tile(True) for y in range(self.height)] for x in range(self.width)]
