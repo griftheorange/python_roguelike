@@ -8,7 +8,7 @@ class Fighter:
         self.hp = hp
         self.defense = defense
         self.power = power
-        self.xp
+        self.xp = xp
     
     def take_damage(self, amount):
         results = []
