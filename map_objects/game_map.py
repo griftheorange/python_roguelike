@@ -4,6 +4,7 @@ from random import randint
 from components.ai import BasicMonster
 from components.fighter import Fighter
 from components.item import Item
+from components.stairs import Stairs
 
 from entity import Entity
 from game_messages import Message
@@ -30,6 +31,9 @@ class GameMap:
        rooms = []
        num_rooms = 0
 
+       center_of_last_room_x = None
+       center_of_last_room_y = None
+
        for r in range(max_rooms):
            # random width and height
            w = randint(room_min_size, room_max_size)
@@ -50,6 +54,9 @@ class GameMap:
                # draw the room
                self.create_room(new_room)
                (new_x, new_y) = new_room.center()
+
+               center_of_last_room_x = new_x
+               center_of_last_room_y = new_y
 
                if num_rooms == 0:
                    # puts player in first room
@@ -74,7 +81,9 @@ class GameMap:
                #append new room to room list
                rooms.append(new_room)
                num_rooms += 1
-       print(len(rooms))
+       stairs_component = Stairs(self.dungeon_level + 1)
+       down_stairs = Entity(center_of_last_room_x, center_of_last_room_y, '>', libtcod.white, 'Stairs', render_order=RenderOrder.STAIRS, stairs=stairs_component)
+       entities.append(down_stairs)
 
     def create_room(self, room):
         # makes all tiles within room dimensions passable
