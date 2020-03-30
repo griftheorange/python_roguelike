@@ -12,6 +12,7 @@ from item_functions import cast_confuse, cast_fireball, cast_lightning, heal
 from render_functions import RenderOrder
 from map_objects.rectangle import Rect
 from map_objects.tile import Tile
+from random_utils import random_choice_from_dict
 
 class GameMap:
     def __init__(self, width, height, dungeon_level=1):
@@ -103,6 +104,9 @@ class GameMap:
         # Get random number for this room's monsters
         number_mons = randint(0, max_monsters_per_room)
         number_of_items = randint(0, max_items_per_room)
+
+        monster_chances = {'orc': 80, 'troll': 20}
+        item_chances = {'healing_potion': 70, 'lightning_scroll': 10, 'fireball_scroll': 10, 'confusion_scroll': 10}
 
         for i in range(number_mons):
             # Choose random location in the room
