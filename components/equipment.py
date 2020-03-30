@@ -9,11 +9,11 @@ class Equipment:
     def max_hp_bonus(self):
         bonus = 0
 
-        if self.main_hand and self.main_hand.equipable:
-            bonus += self.main_hand.equipable.max_hp_bonus
+        if self.main_hand and self.main_hand.equippable:
+            bonus += self.main_hand.equippable.max_hp_bonus
         
-        if self.off_hand and self.off_hand.equipable:
-            bonus += self.off_hand.equipable.max_hp_bonus
+        if self.off_hand and self.off_hand.equippable:
+            bonus += self.off_hand.equippable.max_hp_bonus
         
         return bonus
     
@@ -21,11 +21,11 @@ class Equipment:
     def power_bonus(self):
         bonus = 0
 
-        if self.main_hand and self.main_hand.equipable:
-            bonus += self.main_hand.equipable.power_bonus
+        if self.main_hand and self.main_hand.equippable:
+            bonus += self.main_hand.equippable.power_bonus
         
-        if self.off_hand and self.off_hand.equipable:
-            bonus += self.off_hand.equipable.power_bonus
+        if self.off_hand and self.off_hand.equippable:
+            bonus += self.off_hand.equippable.power_bonus
         
         return bonus
 
@@ -33,11 +33,11 @@ class Equipment:
     def defense_bonus(self):
         bonus = 0
 
-        if self.main_hand and self.main_hand.equipable:
-            bonus += self.main_hand.equipable.defense_bonus
+        if self.main_hand and self.main_hand.equippable:
+            bonus += self.main_hand.equippable.defense_bonus
         
-        if self.off_hand and self.off_hand.equipable:
-            bonus += self.off_hand.equipable.defense_bonus
+        if self.off_hand and self.off_hand.equippable:
+            bonus += self.off_hand.equippable.defense_bonus
         
         return bonus
     
